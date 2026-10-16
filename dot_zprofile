@@ -1,6 +1,9 @@
 # Environment Variables
 export EDITOR=micro
 export VISUAL=kate
+#export STEAM_API_KEY="your_api_key"
+#export STEAM_ID="STEAM_0:1:59854708"
+
 
 export PATH="$PATH:/home/spraddl1337/.local/bin/"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH" ##CHEZ-MOI

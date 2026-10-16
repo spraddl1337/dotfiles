@@ -106,3 +106,5 @@ alias rm='printf "This is not the command you are looking for. Try\033[1;31m \\\
 
 #atuin befehle syntax-fehler löschen
 alias atuin_clean="atuin search --delete --exit 1 --after "yesterday" *"
+
+alias steam+="nohup steam &"
