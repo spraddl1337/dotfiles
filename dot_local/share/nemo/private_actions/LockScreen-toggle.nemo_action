@@ -1,0 +1,7 @@
+[Nemo Action]
+Name=Lockscreen Toggle
+Comment=Lockscreen Toggle
+Exec=sh /home/spraddl1337/MEGA/scripts/desktop-lock-screen-toggle.sh
+Icon-Name=utilities-terminal
+Selection=any
+Extensions=dir;

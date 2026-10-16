@@ -1,0 +1,7 @@
+[Nemo Action]
+Name=BlackBox hier öffnen
+Comment=Öffnet BlackBox Terminal im aktuellen Ordner
+Exec=flatpak run com.raggesilver.BlackBox --working-directory=%F
+Icon-Name=utilities-terminal
+Selection=any
+Extensions=dir;

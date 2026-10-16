@@ -1,0 +1,9 @@
+[Nemo Action]
+Name=_Hibernate Now
+Comment=_Hibernate of the system immediately
+Exec=systemctl hibernate
+Selection=None
+Extensions=any;
+Icon-Name=system-users-symbolic
+Dependencies=systemctl
+Conditions=desktop;

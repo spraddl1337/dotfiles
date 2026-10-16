@@ -1,0 +1,7 @@
+[Nemo Action]
+Name=Ptyxis hier öffnen
+Comment=Öffnet Ptyxis Terminal im aktuellen Ordner
+Exec=flatpak run app.devsuite.Ptyxis --new-window --working-directory=%F
+Icon-Name=utilities-terminal
+Selection=any
+Extensions=dir;
