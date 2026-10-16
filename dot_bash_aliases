@@ -1,0 +1,108 @@
+# update alias
+#
+#alias update+='sudo apt-get update && sudo apt-get upgrade  -y && sudo snap refresh'
+#alias update+='sudo apt-get update && sudo apt-get upgrade -y'; pi-apps update -y;
+alias update+='sudo nala update; sudo nala upgrade --no-autoremove  -y; sudo flatpak update -y; pipx upgrade-all; cinnamon-spice-updater --update-all; tldr -u; omz update;'
+# ------------------------------------------------------------------
+#MEGA/scripts
+# ------------------------------------------------------------------
+alias getUserInstalled="bash ~/MEGA/scripts/getUserInstalled.sh"
+alias getUserInstalled-PPAs="bash ~/MEGA/scripts/getUserInstalled-PPAs.sh"
+alias toggleBluetooth="bash ~/MEGA/scripts/toggleBluetooth.sh"
+alias toggleWifi="bash ~/MEGA/scripts/toggleWifi.sh"
+alias mdview="bash ~/MEGA/scripts/mdview.sh"
+alias lockMe="bash ~/MEGA/scripts/lockMe.sh"
+
+alias pi-status="bash ~/MEGA/scripts/pi-MOTD/pistatus.sh"
+alias pi-services="bash ~/MEGA/scripts/pi-MOTD/services_rainbow.sh"
+alias pi-web="bash ~/MEGA/scripts/pi-MOTD/weblinks.sh"
+alias pi="pi-status;pi-services;pi-web"
+
+#cheat cmdSheet
+alias cheat="cat $HOME/MEGA/Shell-src/cmdSheet-color.txt"
+alias cmdsheet="cat $HOME/MEGA/Shell-src/cmdSheet-color.txt"
+alias cmd-usfull="cat ~/MEGA/Shell-src/cmd-usefull-color.txt"
+alias cmd-tmux="cat ~/MEGA/Shell-src/cmd-tmux-color.txt"
+alias cmd-low-tide="cat ~/MEGA/Shell-src/cmd-low-tide-color.txt"
+
+#chezmoi + git
+#alias chezmoi="./bin/chezmoi"
+alias chezmoi-nav="cheznav"
+alias gitscope="git-scope"
+
+# ------------------------------------------------------------------
+#fastfetch
+# ------------------------------------------------------------------
+if [ -f ~/MEGA/Shell-src/fastfetch-config-tree.jsonc  ]; then
+	alias fastfetch-tree="fastfetch -c ~/MEGA/Shell-src/fastfetch-config-tree.jsonc"
+fi
+if [ -f ~/MEGA/Shell-src/fastfetch-config-fancy.jsonc ]; then
+	alias fastfetch-fancy="fastfetch -c ~/MEGA/Shell-src/fastfetch-config-fancy.jsonc"
+fi
+alias neofetch='printf "This is not the command you are looking for. Try \033[36mfastfetch\033[0m\n"'
+
+# ------------------------------------------------------------------
+#taskmanager
+# ------------------------------------------------------------------
+alias px='nohup sudo xfce4-taskmanager >/dev/null &'
+#alias px='sudo gnome-system-monitor'
+
+# Place above other sudo commands to enable aliases to be sudo-ed.
+alias sudo="sudo "
+
+# ------------------------------------------------------------------
+# Common
+# ------------------------------------------------------------------
+alias python="$(which python3)"
+alias pip=pip3
+
+# ------------------------------------------------------------------
+# Navigation
+# ------------------------------------------------------------------
+alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd $HOME" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+# ------------------------------------------------------------------
+# Copy / Get / Remove
+# ------------------------------------------------------------------
+# mv, cp confirmation
+alias mkdir="mkdir -pv"
+alias cp="cp -iv"
+alias ln='ln -i'
+alias mv="mv -iv"
+
+#better cat: batcat -> bcat
+alias bcat='batcat'
+alias bat='batcat'
+
+#see all hidden files within a directory listed in color mode.
+#alias ls+='ls -d .* --color=auto'
+#exa=better-ls
+alias ls='eza --icons --color=always'
+alias ls+='eza --long --group-directories-first --icons -h'
+alias ,,='eza --icons --color=always'
+
+#dir now display directories first , show all files with different colors,
+#shows all files and display permissions, file sizes and date as well.
+#alias dir+='dir -achltr --group-directories-first --color=auto'
+alias dir+='eza -T -L 2 --long --group-directories-first --icons'
+
+#Check open ports
+#checks open ports on your computer but not all services,
+#you have to run it as root (sudo) in order to display all !
+alias ports='netstat -tulanp'
+
+
+##		use other commands		##
+#trash cli -> diable rm
+#Then, if you really want to use rm, simply prepend a backslash to bypass the alias:
+#\rm file-without-hope
+alias rm='printf "This is not the command you are looking for. Try\033[1;31m \\\\rm \033[0m\n"; false'
+
+#atuin befehle syntax-fehler löschen
+alias atuin_clean="atuin search --delete --exit 1 --after "yesterday" *"

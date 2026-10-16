@@ -1,0 +1,7 @@
+#plugins=(zsh-syntax-highlighting zsh-autosuggestions zsh-autocomplete zsh-you-should-use alias-finder  colored-man-pages battery fancy-ctrl-z fzf kate safe-paste ssh sudo ufw tailscale you-should-use command-not-found zsh-halfpipe zoxide)
+
+#zF-Sy-H
+#plugins
+#pip rclone systemd
+#git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
+#git clone --depth 1 https://github.com/unixorn/fzf-zsh-plugin.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-zsh-plugin

@@ -1,0 +1,182 @@
+{
+  // .config/fastfetch/config.jsonc
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "padding": { "top": 4, "left": 2},
+    "type": "auto",
+    "source": "auto"
+  },
+  "display": {
+    "separator": " ",
+    "color": "blue"
+  },
+  "modules": [
+    { "type": "title", "key": " ", "format": "{#32}{1}{#0}@{#31}{2}" },
+    { "type": "custom", "format":"  {#0}󰮯 {#0} • {#0}• {#0}• {#31} 󰊠 {#32} 󰊠 {#33} 󰊠 {#34} 󰊠 {#35} 󰊠 {#36} 󰊠"},
+    {
+       "type": "os",
+       "key": " OS",
+       "format": "{3} {#37}(arch {12})",
+       "keyColor": "yellow"
+     },
+     {
+         "type": "de",
+         "key": "├ DE",
+         "keyColor": "yellow"
+     },
+     {
+        "type": "kernel",
+        "key": "├ Kernel",
+         //"format": "{1} {2}",
+         "keyColor": "yellow"
+     },
+    {
+      "type": "locale",
+      "key": "├ Local",
+      "keyColor": "yellow"
+    },
+     {
+         "type": "shell",
+         "key": "├ Shell",
+         "keyColor": "yellow"
+     },
+     {
+         "type": "packages",
+         "key": "├󰏖 Packages",
+         "keyColor": "yellow"
+     },
+    {
+      "type": "uptime",
+      "key": "└󰅐 UpTime",
+      "keyColor": "yellow"
+    },
+//    "break",
+    {"type": "custom", "key": "{#37}󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾──󰌾"},
+    {
+      "type": "battery",
+      "key": "󱐥 Power {2}",
+      "format": "{4}[{5}]{#37}|{3}",
+      "temp": true,
+      "keyColor": "red"
+    },
+     {
+         "type": "display",
+         "key": "├󰍹 Display ",
+         "format": "{6} {1}x{2}px {3}hz",
+         "keyColor": "red"
+     },
+    {
+      "type": "cpu",
+      "key": "├󰻠 CPU",
+      "showPeCoreCount": true,
+      "temp": true,
+      "format": "{1} ({4}) @ {7} {8}",
+      "keyColor": "red"
+    },
+    {
+      "type": "gpu",
+      "key": "├󰍛 GPU",
+      "driverSpecific": true,
+      "temp": true,
+      "keyColor": "red"
+      //"format": "{1} {2} {6}" // Index 6 statt 5 für die Temperatur
+    },
+    {
+      "type": "memory",
+      "key": "├󰑭 RAM ",
+        "percent": {
+        "type": 3, // 3 = show number + bar + percentage
+        "green": 30, // <30% is green
+        "yellow": 70 // 30-70% is yellow, >70% is red
+      },
+      "keyColor": "magenta"
+    },
+    {
+      "type": "swap",
+      "key": "├󰓡 SWAP {2}",
+      "separate": true,
+      "percent": {
+         "type": 3, // 3 = show number + bar + percentage
+         "green": 30, // <30% is green
+         "yellow": 70 // 30-70% is yellow, >70% is red
+      },
+      "keyColor": "magenta"
+    },
+    {
+      "type": "disk",
+      "key": "├ Disk {1}",
+      "percent": {
+        "type": 3, // 3 = show number + bar + percentage
+        "green": 30, // <30% is green
+        "yellow": 70 // 30-70% is yellow, >70% is red
+      },
+      "keyColor": "magenta"
+    },
+    {
+      "type": "localip",
+      "key": "├󰩟 LocalIP ({2})",
+      "showIpv6": false,
+      "showFlags": true,
+      "showMac": true,
+      "showSpeed": true,
+      "showAllIps": true,
+      "format": " {1} ({3})",
+      "keyColor": "green"
+    },
+    {
+      "type": "command",
+      "key": "├󰒄 TCP Ports",
+      "keyColor": "green",
+      "text": "ss -tlnH | awk '{print $4}' | sed 's/.*://' | sort -nu | tr '\\n' ' ' | sed 's/ $//'"
+    },
+    {
+      "type": "command",
+      "key": "└󰒄 UDP Ports",
+      "keyColor": "green",
+      "text": "ss -ulnH | awk '{print $4}' | sed 's/.*://' | sort -nu | tr '\\n' ' ' | sed 's/ $//'"
+    },
+//    "break",
+    {"type": "custom", "key": "{#0}⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙ ── ⚙"},
+     {
+         "type": "wm",
+         "key": "󰧨 Window Manager",
+         "format": "{2} {#37}[{3}]",
+         "keyColor": "blue"
+     },
+     {
+         "type": "wmtheme",
+         "key": "├󰉼 WM Theme",
+         "keyColor": "blue"
+     },
+     {
+         "type": "theme",
+         "key": "├ Color Themes",
+         "keyColor": "blue"
+     },
+     {
+         "type": "icons",
+         "key": "├󰸉 System Icons",
+         "keyColor": "blue"
+     },
+     {
+         "type": "font",
+         "key": "├ System Fonts",
+         "keyColor": "blue"
+     },
+     {
+         "type": "cursor",
+         "key": "├󰇀 Cursor Theme",
+         "keyColor": "blue"
+     },
+     {
+         "type": "terminal",
+         "key": "└ Terminal",
+         "format": "{3} v.{4}",
+         "keyColor": "blue"
+     },
+     { "type": "custom", "format":"  {#0}󰮯 {#0} • {#0}• {#0}• {#31} 󰊠 {#32} 󰊠 {#33} 󰊠 {#34} 󰊠 {#35} 󰊠 {#36} 󰊠"},
+     // "break",
+     //"colors",
+     {"type": "version", "key": " ", "format": "{1} v{2} {#37}{6}", "keyColor": "cyan"},
+  ]
+}

@@ -1,0 +1,8 @@
+# Environment Variables
+export EDITOR=micro
+export VISUAL=kate
+
+export PATH="$PATH:/home/spraddl1337/.local/bin/"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH" ##CHEZ-MOI
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin/protonhax/"

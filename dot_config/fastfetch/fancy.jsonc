@@ -1,0 +1,414 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "type": "auto",
+        "source": "/home/wombat/Pictures/Linux/CachyLOGO_White.png",
+        "position": "left",
+        "width": 18,          // Width in characters (for image logos)
+        "printRemaining": false,
+        "height": 17,         // Height in characters (for image logos)
+        "padding": {
+            "top": 2,           // Top padding
+            "left": 88,          // Left padding
+            "right": 2          // Right padding
+        }
+    },
+    "display": {
+        "color": {
+            "keys": "bright_white"
+        },
+        "separator": "",
+        "constants": [
+            "─────────────────────────────────────────────────────────────────────",   // {$1} - horizontal line for borders
+            "\u001b[70D",                                               // {$2} - move cursor left 50->70 columns Cursor ganz zurück nach links
+            "\u001b[70C",                                               // {$3} - move cursor right 50->70 columns Äußerer rechter Rand (weiter rechts)
+            "\u001b[69C"                                                // {$4} - move cursor right 54->69 columns Innerer rechter Rand (für Unter-Boxen)
+        ],
+        "brightColor": true
+    },
+    "modules": [
+        "break",
+        {
+            "type": "version",
+            //"padding": {"top": 0, "left": 2, "right": 2},
+            "key": "\u001b[160D┌────────────┬─{$1}┐\u001b[59D",
+            "format": "\u001b[1m{#keys} {1} - {2} "
+        },
+        {
+            "type": "os",
+            "format": "{#1}{pretty-name}{#0} {codename}  {#37}[{arch}]",
+            "key": "\u001b[160D│  \u001b[s{sysname}\u001b[u\u001b[10C│{$3}│{$2}"
+        },
+        {
+            "type": "kernel",
+            "format": "{sysname} {#1}{release}{#0}  {#37}[{arch}]",
+            "key": "\u001b[160D│  \u001b[sKernel\u001b[u\u001b[10C│{$3}│{$2}"
+        },
+        {
+            "type": "title",
+            "format": "{#32}{1}{#0}@{#31}{2}",
+            "key": "\u001b[160D│  usr@Host  │{$3}│{$2}"
+        },
+        {
+            "type": "datetime",
+            "key": "\u001b[160D│  Fetched   │{$3}│{$2}",
+            "format": "{day-pretty}-{month-pretty}-{year} {hour-pretty}:{minute-pretty}:{second-pretty} {timezone-name}"
+        },
+        {
+            "type": "locale",
+            "format": "",
+            "key": "\u001b[160D│  Locale    │{$3}│{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D├────────────┴─{$1}┤",                // Bottom border of the entire layout
+            "format": ""
+        },
+
+        // Hardware section with cyan color theme
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}┌───────────┬{$1}┐{#keys}│\u001b[55D",
+            "format": "{#bright_white} Hardware "
+        },
+        {
+            "type": "board",
+            "format": "{2} {1} {#37}(ver. {3})" ,
+            "key": "\u001b[160D│{#white}│ Board     │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "bootmgr",
+            "format": "{1} {2} {#37}secureBoot:{4} ",
+            "key": "\u001b[160D│{#white}│ BootMgr   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "chassis",
+             "format": "{1} {#37}{2} {#0}{#1}{3} {#37}{4}",
+            "key": "\u001b[160D│{#white}│ Chassis   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "cpu",
+            "key": "\u001b[160D│{#white}│ CPU       │{$4}│{#keys}│{$2}",
+            "format": "{name}{#37} ({cores-physical}cores){#0} {freq-max} {#37}{march} {temperature}",
+            "showPeCoreCount": false
+        },
+        {
+            "type": "cpuusage",
+            "key": "\u001b[160D│{#white}│ CPU-use   │{$4}│{#keys}│{$2}",
+            "format": "{6} {1} {#37}[min:{4}|max:{2}]",
+            "temp": true,
+            "percent": {
+                "type": 3, // 3 = show number + bar + percentage
+                "green": 30, // <30% is green
+                "yellow": 70 // 30-70% is yellow, >70% is red
+            },
+            "freqNdigits": 1,
+        },
+        {
+            "type": "gpu",
+            "format": "{shared-percentage-bar} {vendor} {name} {frequency} {temperature} {#37}[{type}]{#0} ",
+            "key": "\u001b[160D│{#white}│ GPU       │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "memory",
+            "key": "\u001b[160D│{#white}│ RAM       │{$4}│{#keys}│{$2}",
+            "format": "{percentage-bar} {percentage} {#cyan}{used}{#37}/{total}",
+            // "keyColor": "34",
+            "percent": {
+                "type": 3, // 3 = show number + bar + percentage
+                "green": 30, // <30% is green
+                "yellow": 70 // 30-70% is yellow, >70% is red
+            }
+        },
+        {
+            "type": "swap",
+            "separate": true,
+            "key": "\u001b[160D│{#white}│ SWAP      │{$4}│{#keys}│{$2}",
+            // "keyColor": "34",
+            "format": "{percentage-bar} {percentage} {#cyan}{1}{#37}/{2}{#0} {#1}{5}",
+            "percent": {
+                "type": 3, // 3 = show number + bar + percentage
+                "green": 30, // <30% is green
+                "yellow": 70 // 30-70% is yellow, >70% is red
+            }
+        },
+        {
+            "type": "disk",
+            "key": "\u001b[160D│{#white}│ Disk      │{$4}│{#keys}│{$2}",
+            // "keyColor": "34",
+            "format": "{size-percentage-bar} {size-percentage} {#cyan}{size-used}{#37}/{size-total} {#0}{#1}{mountpoint}{#0} {#37}[{filesystem}]",
+            "percent": {
+                "type": 3, // 3 = show number + bar + percentage
+                "green": 30, // <30% is green
+                "yellow": 70 // 30-70% is yellow, >70% is red
+            },
+        },
+        {
+            "type": "physicaldisk",
+            "key": "\u001b[160D│{#white}│ PhyDisk   │{$4}│{#keys}│{$2}",
+            // "keyColor": "34",
+            "format": "{#0}{name} {6} {#37}{size} {#0}{dev-path} [{#37}{6}|{7}]",
+            "percent": {
+                "type": 3, // 3 = show number + bar + percentage
+                "green": 30, // <30% is green
+                "yellow": 70 // 30-70% is yellow, >70% is red
+            },
+        },
+        {
+            "type": "camera",
+            //"format": "",
+            "format": "{name} {#1}{width}x{height}px {#37}{id}",
+            "temp": true,
+            "key": "\u001b[160D│{#white}│ Camera    │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "keyboard",
+            "format": "{name} {#37}{serial}",
+            "key": "\u001b[160D│{#white}│ Keyboard  │{$4}│{#keys}│{$2}"
+        },
+                {
+            "type": "Mouse",
+            "format": "{name} {#37}{serial}",
+            "key": "\u001b[160D│{#white}│ Mouse     │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "battery",
+            "format": "{#0}{capacity} [{status}] {15} {#37}{9}",
+            "temp": true,
+            "key": "\u001b[160D│{#white}│ Battery   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}└───────────┴{$1}┘{#keys}│",
+            "format": ""
+        },
+
+        // Desktop section with green color theme
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}┌───────────┬{$1}┐{#keys}│\u001b[55D",
+            "format": "{#bright_white} Desktop "
+        },
+        {
+            "type": "de",
+            "format": "{#1}{pretty-name}{#0} {version}",
+            "key": "\u001b[160D│{#white}│ Desktop   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "wm",
+            "format": "{#1}{pretty-name}{#0} {#37}[{3}] {5} {4}",
+            "key": "\u001b[160D│{#white}│ Session   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "lm",
+            "format": "{#1}{service}{#0} {#37}[{type}] {#1}v{#0}{#37}{version}",
+            "key": "\u001b[160D│{#white}│ LoginMgr  │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "wmtheme",
+            "format": "{1} {#37}{2}",
+            "key": "\u001b[160D│{#white}│ Theme     │{$4}│{#keys}│{$2}",
+            "format": "{1}"
+        },
+        {
+            "type": "icons",
+            //"format": "{1} {#37}{2}",
+            "key": "\u001b[160D│{#white}│ Icons Set │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "font",
+            //"format": "{1} {#37}{2}",
+            "key": "\u001b[160D│{#white}│ Font      │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "cursor",
+            "format": "{1} ({#37}{2})",
+            "key": "\u001b[160D│{#white}│ Cursor    │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "display",
+            "format": "{name} {#1}{width}x{height}px {#0}{refresh-rate}Hz {#1}{#37}main:{#0}{#37}{is-primary} {#37}{#1}api:{#0}{#37}{platform-api} {type} ",
+            "key": "\u001b[160D│{#white}│ Display   │{$4}│{#keys}│{$2}",
+            //"compactType": "original-with-refresh-rate"
+        },
+         {
+             "type": "gpu",
+             "key": "\u001b[160D│{#white}│ Driver    │{$4}│{#keys}│{$2}",
+             "format": "{driver} {#37}{platform-api}"
+         },
+        {
+            "type": "sound",
+            "format": "{name}({volume-percentage}){#37}{platform-api}",
+            "key": "\u001b[160D│{#white}│ Sound     │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}└───────────┴{$1}┘{#keys}│",
+            "format": ""
+        },
+        //  section with yellow color theme
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}┌───────────┬{$1}┐{#keys}│\u001b[55D",
+            "format": "{#bright_white} Connections "
+        },
+        {
+            "type": "wifi",
+            "format": "{#cyan}{inf-desc}{#0} {#1}{ssid}{#0} {signal-quality}|{band}GHz {#37}[{security}|chanel:{channel}]",
+            "key": "\u001b[160D│{#white}│ Wifi      │{$4}│{#keys}│{$2}"
+        },
+        {
+             "type": "netio",
+
+             "key": "\u001b[160D│{#white}│ Net IO    │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "localip",
+            "format": "{#cyan}{ifname}{#0} {#1}{ipv4}{#0} {#37}{3}{mac} ",
+            "key": "\u001b[160D│{#white}│ LocalIP   │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "publicip",
+            "key": "\u001b[160D│{#white}│ PublicIP  │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "command",
+            "text": "ss -tlnH | awk '{print $4}' | sed 's/.*://' | sort -nu | tr '\\n' ' ' | sed 's/ $//'",
+            "key": "\u001b[160D│{#white}│ Prots TCP │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "command",
+            "text": "ss -ulnH | awk '{print $4}' | sed 's/.*://' | sort -nu | tr '\\n' ' ' | sed 's/ $//'",
+            "key": "\u001b[160D│{#white}│ Ports UDP │{$4}│{#keys}│{$2}"
+        },
+/*        {
+            "type": "dns",
+            "format": "{1}",
+            "key": "\u001b[160D│{#white}│ DNS       │{$4}│{#keys}│{$2}"
+        },*/
+        {
+            "type": "command",
+            "key": "\u001b[160D│{#white}│ DNS       │{$4}│{#keys}│{$2}",
+            "shell": "sh",
+            "text": "nmcli dev show | grep 'DNS' | awk '{print $2}' | tr '\\n' ' ' | cut -c 1-68",
+            "format": "{1}"
+        },
+        {
+            "type": "bluetoothradio",
+            "format": "{#blue}BT-V:{version}{#0} {vendor} {#37}{address} {#1}[:{discoverable}|󱘖:{connectable}]",
+            "key": "\u001b[160D│{#white}│ BT Radio  │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "bluetooth",
+            "format": "{name} {battery-percentage} {#37}[{type}] {#0}󱘖{connected} {#37}{address}",
+            "showDisconnected": false,
+            "key": "\u001b[160D│{#white}│ BT Device │{$4}│{#keys}│{$2}"
+        },
+
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}└───────────┴{$1}┘{#keys}│",
+            "format": ""
+        },
+
+        // Terminal section with yellow color theme
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}┌───────────┬{$1}┐{#keys}│\u001b[55D",
+            "format": "{#bright_white} Terminal "
+        },
+        {
+            "type": "shell",
+            "format": "{pretty-name} v.{version} {#37}{exe-path}",
+            "key": "\u001b[160D│{#white}│ Shell     │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "terminal",
+            "format": "{3} {#37}v.{4}",
+            "key": "\u001b[160D│{#white}│ Terminal  │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "terminalsize",
+            "format": "{2} columns x {1} rows ({#37}{3}x{4}px)",
+            "key": "\u001b[160D│{#white}│ Term Size │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "terminalfont",
+            "key": "\u001b[160D│{#white}│ Term Font │{$4}│{#keys}│{$2}"
+        },
+        {
+             "type": "terminaltheme",
+             "format": "{#1}{fg-color}{#37}[FG]{#0}{fg-type}    {#1}{bg-color}{#0}{#37}[BG]{#0}{bg-type} ",
+             "key": "\u001b[160D│{#white}│ Colors    │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "packages",
+            "key": "\u001b[160D│{#white}│ Packages  │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}└───────────┴{$1}┘{#keys}│",
+            "format": ""
+        },
+        // abschnitt Uptime
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}┌───────────┬{$1}┐{#keys}│\u001b[54D",
+            "format": "{#bright_white} Uptime "
+        },
+        {
+            "type": "uptime",
+            "key": "\u001b[160D│{#white}│ Uptime    │{$4}│{#keys}│{$2}"
+        },
+        {
+            "condition": {                                    // Conditional module: only show on non-macOS
+                "!system": "macOS"
+            },
+            "type": "disk",
+            "key": "\u001b[160D│{#white}│ OS Age    │{$4}│{#keys}│{$2}",
+            "folders": "/",                                   // Check root filesystem
+            "format": "{#15}{create-time:10} {#37}[{days} days]"        // Show creation time and age in days
+        },
+        {
+            "condition": {                                    // Conditional module: only show on macOS
+                "system": "macOS"
+            },
+            "type": "disk",
+            "key": "\u001b[160D│{#white}│ OS Age    │{$4}│{#keys}│{$2}",
+            "folders": "/System/Volumes/VM",                 // Work around for APFS on macOS
+            "format": "{create-time:10} [{days} days]"
+        },
+        {
+            "type": "users",
+            "myselfOnly": true,                               // Only show current user
+            "key": "\u001b[160D│{#white}│ Login     │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "datetime",
+            "format": "{#1}{weekday-short}{#0} {day-in-month}-{month-pretty}-{year} {#1}{hour-pretty}:{minute-pretty}{#0} {#37}({timezone-name}{offset-from-utc})",
+            "key": "\u001b[160D│{#white}│ Time      │{$4}│{#keys}│{$2}"
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D│{#white}└───────────┴{$1}┘{#keys}│",
+            "format": ""
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D│ {$3}            │{$2}",
+            "format":"\t\t{#37}󰮯 {#37} • {#37}• {#37}• {#31} 󰊠 {#32} 󰊠 {#33} 󰊠 {#34} 󰊠 {#35} 󰊠 {#36} 󰊠"
+            // "format":"{#37}󰮯 {#31} 󰧞 {#32} 󰧞 {#33} 󰧞 {#36} 󰊠 {#35} 󰊠 {#34} 󰊠 {#33} 󰊠 {#32} 󰊠 {#31} 󰊠 "
+        },
+        {
+            "type": "custom",
+            "key": "\u001b[160D└──────────────{$1}┘",                // Bottom border of the entire layout
+            "format": ""
+        },
+
+        // End with color palette and line break
+        // "break",                                             // Add a blank line
+        //"colors"                                             // Display color palette
+
+        "break",
+    ]
+}
