@@ -1,0 +1,9 @@
+.cache
+.venv
+.config/*/cache
+.local/share/atuin/meta.db
+.local/share/atuin/records.db
+.librewolf/*/cache*
+.librewolf/*/crashes
+.librewolf/*/storage
+README.md
